@@ -41,7 +41,7 @@ COARSE_GAMMAS = np.geomspace(0.1, 5, 40)   # 1차 탐색 (넓게, seed 3개)
 COARSE_SEEDS = range(3)
 FINE_STEPS = 21                            # 2차 탐색 (9개 근처, seed 20개)
 FINE_SEEDS = range(20)
-FRAGMENT_RATIO = 0.10                      # 세대수가 평균의 10% 미만인 생활권 = 자투리
+FRAGMENT_RATIO = 0.50                      # 세대수가 평균의 50% 미만인 생활권 = 자투리
 
 
 def distance_weight(walk_m):
@@ -219,7 +219,7 @@ ax.set_title(f"γ 탐색 · {len(fine_gammas) * len(FINE_SEEDS)}회 중 9개 {in
              f"자투리 없는 9개 {int(log.k9_clean.sum())}회", loc="left", color=INK, fontsize=12)
 style(ax)
 
-fig.suptitle(f"{PLAN} · {PLAN_LABEL}\n{EDGE_LABEL} · 결과: {status}, "
+fig.suptitle(f"{PLAN} · {PLAN_LABEL}\n{EDGE_LABEL} · 자투리 기준: 평균의 50%({FRAGMENT_HH:,.0f}세대) 미만\n결과: {status}, "
              f"선 굵기의 {inside_share:.0%}가 생활권 안쪽", x=0.02, y=1.0, ha="left", va="bottom", fontsize=14, color=INK)
 fig.savefig(ROOT / OUTPUT_PNG, dpi=140, bbox_inches="tight")
 print("saved", OUTPUT_PNG)
